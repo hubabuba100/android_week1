@@ -12,6 +12,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -48,27 +49,27 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void print(char operation){
-       try {
-           BigDecimal num1 = new BigDecimal(Double.parseDouble(first.getText().toString()));
-           BigDecimal num2 = new BigDecimal(Double.parseDouble(second.getText().toString()));
-           switch (operation){
-               case '+':
-                   result.setText((String.valueOf(num1.add(num2))));
-                   break;
-               case '-':
-                   result.setText((String.valueOf(num1.subtract(num2))));
-                   break;
-               case  '*':
-                   result.setText((String.valueOf(num1.multiply(num2))));
-                   break;
-               case '/':
-                   result.setText((String.valueOf(num1.divide(num2))));
-                   break;
-           }
-       }
-       catch (Exception e){
-           result.setText("Try again please");
-       }
+        try {
+            BigDecimal num1 = new BigDecimal(Double.parseDouble(first.getText().toString()));
+            BigDecimal num2 = new BigDecimal(Double.parseDouble(second.getText().toString()));
+            switch (operation){
+                case '+':
+                    result.setText((String.valueOf(num1.add(num2))));
+                    break;
+                case '-':
+                    result.setText((String.valueOf(num1.subtract(num2))));
+                    break;
+                case  '*':
+                    result.setText((String.valueOf(num1.multiply(num2))));
+                    break;
+                case '/':
+                    result.setText((String.valueOf(num1.divide(num2, 12, RoundingMode.HALF_UP).stripTrailingZeros())));
+                    break;
+            }
+        }
+        catch (Exception e){
+            result.setText("Try again please");
+        }
     }
 
 }
